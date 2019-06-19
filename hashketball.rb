@@ -245,12 +245,15 @@ def most_points_scored
 end
 
 def winning_team
-  # Set up a hash to keep track of the points scored by each team. This way, we can iterate through each player, get their points scored, and increase the count in the hash.
+# Create new hash to store scores 
 
   scores = { 'Brooklyn Nets' => 0, 'Charlotte Hornets' => 0 }
 
-  game_hash.each do |_team, game_data|
+#iterate through game hash 
+  game_hash.each do |team, game_data|
+    #iterate through player hash 
     game_data[:players].each do |player|
+      #adds to specific branch of nested hash according to team name and uses player iterator to add number of points to that key as a value 
       scores[game_data[:team_name]] += player_iterator(player[:player_name], :points)
     end
   end
