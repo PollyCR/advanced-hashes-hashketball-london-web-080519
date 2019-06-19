@@ -268,5 +268,6 @@ end
 # # Super Bonus Question
 
 def long_name_steals_a_ton?
+  #asks whether the player who the player_with_most_of method returns as having the highest number of steals is equal to the player returned as having the longest name
   player_with_most_of(:steals) == player_with_most_of(:player_name)
 end
