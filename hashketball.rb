@@ -176,7 +176,7 @@ def player_stats(name)
 #searches through players hash to find individual player
       game_hash[place][attribute].each do |player|
         next unless player[:player_name] == name
-#populates stats hash with 
+#populates stats hash with player key/value pairs for which code evaluates to true
         stats_hash = player.delete_if do |key, value|
           key == :player_name
         end
@@ -187,11 +187,13 @@ def player_stats(name)
 end
 
 def big_shoe_rebounds
+  #set baseline values 
   biggest_shoe = 0
   num_rebounds = 0
-
+#iterate through game hash to find player data 
   game_hash.each do |team, game_data|
     game_data[:players].each do |player|
+      #searches each player's shoe size value in turn. If the shoe size being evaluated is larger than baseline, sets new value to that. For subsequent iterations, if the shoe size being evaluated is larger than the previous value, changes the value again. 
       if player[:shoe] > biggest_shoe
         biggest_shoe = player[:shoe]
         num_rebounds = player[:rebounds]
@@ -202,8 +204,11 @@ def big_shoe_rebounds
   num_rebounds
 end
 
+#bonus method to refactor iterating through players to evaluate highest stat. 
 def player_iterator(name, stat)
+  #iterate through game hash
   game_hash.each do |team, game_data|
+    #iterate through team hash to find player data
     game_data[:players].each do |player|
       return player[stat] if player[:player_name] == name
     end
@@ -211,12 +216,15 @@ def player_iterator(name, stat)
 end
 
 def player_with_most_of(stat)
+  #set baseline values 
   player_name = nil
   stat_value = 0
-
+#iterate through game hash 
   game_hash.each do |team, game_data|
+    #iterate through team hash to find player hash 
     game_data[:players].each do |player|
       if player[stat].is_a? String
+        #iterate through player names and evaluates them against stat value OR player name length, then changes value if current one is higher
         if player[stat].length > stat_value
           stat_value = player[stat].length
           player_name = player[:player_name]
@@ -231,6 +239,7 @@ def player_with_most_of(stat)
   player_name
 end
 
+#employs the player_with_most_of method to find the :points key and return player with highest number of points
 def most_points_scored
   player_with_most_of(:points)
 end
