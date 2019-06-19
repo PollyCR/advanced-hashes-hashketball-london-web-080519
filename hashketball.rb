@@ -166,7 +166,9 @@ def player_numbers(team_name)
 end
 
 def player_stats(name)
+  #create new hash to store player stats 
   stats_hash = {}
+  #collect 
   game_hash.collect do |place, team|
     team.each do |attribute, _data|
       next unless attribute == :players
