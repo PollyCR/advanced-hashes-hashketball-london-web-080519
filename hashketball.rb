@@ -170,12 +170,13 @@ def player_stats(name)
   stats_hash = {}
   #collect applies the block of code to all items and returns the new array
   game_hash.collect do |place, team|
-    team.each do |attribute, _data|
+    #searches through team hash to find players hash 
+    team.each do |attribute, data|
       next unless attribute == :players
-
+#searches through players hash to find individual player
       game_hash[place][attribute].each do |player|
         next unless player[:player_name] == name
-
+#populates stats hash with 
         stats_hash = player.delete_if do |key, value|
           key == :player_name
         end
