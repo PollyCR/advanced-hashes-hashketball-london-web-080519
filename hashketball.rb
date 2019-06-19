@@ -168,7 +168,7 @@ end
 def player_stats(name)
   #create new hash to store player stats 
   stats_hash = {}
-  #collect a
+  #collect applies the block of code to all values 
   game_hash.collect do |place, team|
     team.each do |attribute, _data|
       next unless attribute == :players
