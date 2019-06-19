@@ -102,10 +102,14 @@ away: { team_name: 'Charlotte Hornets',
 end
 
 def num_points_scored(name)
+  #iterate through game hash created above. 
   game_hash.each do |place, team|
+    #iterate through team hash 
     team.each do |attribute, data|
+      #keep looking until player is found in hash. Data is what's inside  
       next unless attribute == :players
       data.each do |player|
+        #Found player -- ask to return player's point score once the name value matches given argument
         return player[:points] if player[:player_name] == name
       end
     end
@@ -113,11 +117,15 @@ def num_points_scored(name)
 end
 
 def shoe_size(name)
+  #iterate through hash to look for matching value
   game_hash.each do |place, team|
+    #iterate through team hash to find player
     team.each do |attribute, data|
+      #stop once player name matches
       next unless attribute == :players
-
+#iterate through player data
       data.each do |player|
+        #found player - return player's shoe size once name value matches given argument 
         return player[:shoe] if player[:player_name] == name
       end
     end
@@ -125,26 +133,31 @@ def shoe_size(name)
 end
 
 def team_colors(team_name)
+    #iterate through hash to look for matching value
   game_hash.each do |place, team|
+     #found team - return team colours once name value matches given argument 
     return game_hash[place][:colors] if team[:team_name] == team_name
   end
 end
 
 def team_names
-  game_hash.collect do |_place, team|
+  game_hash.collect do |place, team|
     team[:team_name]
   end
 end
 
-def player_numbers(team_name)
+def player_numbers(team_name) 
+  #create new array to store numbers
   nums = []
+  #work through game hash to find team name 
   game_hash.each do |place, team|
     next unless team[:team_name] == team_name
-
+#work through team hash to find players hash 
     team.each do |attribute, data|
       next unless attribute == :players
-
+#work through data hash 
       data.each do |data|
+        #shovel each player number into new array
         nums << data[:number]
       end
     end
